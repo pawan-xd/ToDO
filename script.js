@@ -3,52 +3,65 @@ const inputField = document.getElementById("InputField");
 const list = document.getElementById("taskList");
 inputButton.addEventListener("click", append);
 
-
+let count = localStorage.length;
 function loader() {
-	
+	for (x of Object.keys(localStorage)) {
+		liCreator(x);
+	}
 }
-loader()
+loader();
 
 // let count=0
-let count = localStorage.length;
 
-// console.log(count);
-function append() {
-	count += 1;
-	// console.log(count);
+function liCreator(key) {
+	const task = JSON.parse(localStorage.getItem(key));
 
-	let taskInput = inputField.value;
-	let task={
-		text: taskInput,
-		completed: false
-	}
-	localStorage.setItem(count, JSON.stringify(task));
-	inputField.value = "";
-	
 	const listItem = document.createElement("li");
-	const textDiv=document.createElement("div");
-	textDiv.classList.add("textDiv")
-	const pText=document.createElement("p");
-	pText.textContent=taskInput
-	textDiv.appendChild(pText)
+	const textDiv = document.createElement("div");
+	textDiv.classList.add("textDiv");
+	const pText = document.createElement("p");
+	pText.textContent = task.text;
+	if (task.completed == true) {
+		pText.style.textDecoration = "line-through";
+	}
+	textDiv.appendChild(pText);
 
-	listItem.appendChild(textDiv)
-    addButton(listItem)
-    
+	listItem.appendChild(textDiv);
+	addButton(listItem,key);
+
 	list.appendChild(listItem);
 }
 
-function addButton(listItem){
-    cmpButton=document.createElement("button")
-    cmpButton.textContent="mark as completed"
-    cmpButton.addEventListener("click", function(){completed(this)})
-    listItem.appendChild(cmpButton)
+function append() {
+	count += 1;
+
+	const taskInput = inputField.value;
+	const task = {
+		text: taskInput,
+		completed: false,
+	};
+	localStorage.setItem(count, JSON.stringify(task));
+
+	liCreator(count);
+	inputField.value = "";
 }
 
-function completed(cButton){
-	const textDiv=cButton.previousElementSibling;
-	let crossed=document.createElement("del");
-	crossed.textContent=textDiv.children[0].textContent
-	textDiv.removeChild(textDiv.children[0])
-	textDiv.appendChild(crossed)
-}	
+function addButton(listItem,curr_count) {
+	cmpButton = document.createElement("button");
+	cmpButton.textContent = "mark as completed";
+	cmpButton.dataset.taskID = curr_count;
+	cmpButton.addEventListener("click", function () {
+		completed(this);
+	});
+	listItem.appendChild(cmpButton);
+}
+
+function completed(cButton) {
+	const textDiv = cButton.previousElementSibling;
+	txt = textDiv.children[0];
+	txt.style.textDecoration = "line-through";
+
+	let task = JSON.parse(localStorage.getItem(cButton.dataset.taskID));
+	task.completed = true;
+	localStorage.setItem(cButton.dataset.taskID, JSON.stringify(task));
+}
