@@ -1,0 +1,62 @@
+body{
+	max-width: 800px;
+	margin: auto;
+}
+
+*{
+	margin: 0px;
+	padding: 0px;	
+	box-sizing: border-box;
+}
+
+#InputField {
+	width: 600px;
+	height: 35px;
+	border-radius: 4px;
+	margin: 20px;
+}
+
+#InputBtn{
+	margin: 20px;
+}
+
+#inputDiv {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#taskDiv{
+	margin: 40px;
+}
+
+ul {
+	list-style: none;
+	padding: 0; /* Optional: Remove default padding for the ul element */
+}
+
+li{
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid black;
+	border-radius: 5px;
+	height: 40px;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+li > button{
+	display: none;
+}
+
+li:hover > button{
+	display: inline-block;
+}
+
+.textDiv{
+	display: inline-block;
+}
+
+
+
