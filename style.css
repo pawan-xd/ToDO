@@ -9,16 +9,21 @@ body{
 	box-sizing: border-box;
 }
 
+button{
+	padding: 2px;
+}
+
 #InputField {
 	width: 600px;
 	height: 35px;
 	border-radius: 4px;
 	margin: 20px;
+	padding: 5px;
 }
 
-#InputBtn{
+/* #InputBtn{
 	margin: 20px;
-}
+} */
 
 #inputDiv {
 	display: flex;
@@ -37,12 +42,15 @@ ul {
 
 li{
 	margin: 10px;
-	padding: 10px;
+	padding: 15px;
 	border: 2px solid black;
 	border-radius: 5px;
-	height: 40px;
+	height: 50px;
 
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	gap: 5px;
+
 	justify-content: space-between;
 }
 
@@ -56,7 +64,5 @@ li:hover > button{
 
 .textDiv{
 	display: inline-block;
+	max-width: 70%;
 }
-
-
-
